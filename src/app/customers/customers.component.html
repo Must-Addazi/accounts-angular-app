@@ -1,0 +1,49 @@
+
+<div class="container mt-2">
+    <div class="card">
+      <div class="card-header">
+        Customers
+      </div>
+      <div class="card-body">
+        <div *ngIf="searchCustomerFormGroup">
+          <form class="d-flex align-items-center gap-2 mb-2" [formGroup]="searchCustomerFormGroup" (ngSubmit)="handelsearchCustomer()">
+            <label for="input" class="form-label mb-0 input-group-text">Keyword</label>
+            <input type="text" class="form-control" id="input" formControlName="keyword" style="max-width: 300px;">
+            <button class="btn btn-info">
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+        </div>
+        <div *ngIf="!customers; else tableContent"> 
+          <p>Loading...</p>
+        </div>
+        <ng-template #tableContent>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of customers">
+                <td>{{ c.id }}</td>
+                <td>{{ c.name }}</td>
+                <td>{{ c.email }}</td>
+                <td>
+                  <button (click)="deleteCustomer(c.id)" 
+                  class="btn btn-danger"> <i 
+                    class="bi bi-trash" 
+                  ></i></button>
+                  
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  
